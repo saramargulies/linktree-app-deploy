@@ -1,0 +1,42 @@
+volumes:
+  linktree-app-data:
+    external: true
+services:
+  fastapi:
+    environment:
+      CORS_HOST: http://localhost:3000
+      DATABASE_URL: postgresql://example_user:secret@db/example
+      WAIT_HOSTS: db:5432
+      PORT: 8000
+    build:
+      context: api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/app
+
+  ghi:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./ghi:/app
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: example_user
+      POSTGRES_DB: example
+    ports:
+      - "15432:5432"
+    volumes:
+      - linktree-app-data:/var/lib/postgresql/data
