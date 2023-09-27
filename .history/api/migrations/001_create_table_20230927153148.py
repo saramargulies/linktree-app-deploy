@@ -6,7 +6,7 @@ steps = [
             id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(1000),
             link VARCHAR(1000) NOT NULL,
-            username VARCHAR(1000) NOT NULL,
+            username VARCHAR(1000)
             counter INTEGER NOT NULL,
             locked BOOLEAN NOT NULL
         );
