@@ -48,3 +48,10 @@ export const linktreeApi = createApi({
           }),
     })
 })
+
+export const {
+    useSignUpMutation,
+    useLoginMutation,
+    useGetAccountQuery,
+    useLogoutMutation,
+} = linktreeApi
