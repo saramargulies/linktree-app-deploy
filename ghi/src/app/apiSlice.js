@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const linktreeApi = createApi({
     reducerPath: "linktreeApi",
@@ -46,6 +46,21 @@ export const linktreeApi = createApi({
             }),
             invalidatesTags: ["Account"],
           }),
+        addLink: builder.mutation({
+            query: ({ name, link }) => {
+                const body = {
+                    name: name,
+                    link: link
+                }
+                return {
+                    url: "/links",
+                    method: "POST",
+                    body,
+                    credentials: "include"
+                }
+            },
+            invalidatesTags: ["Links"],
+        }),
     })
 })
 
@@ -54,4 +69,5 @@ export const {
     useLoginMutation,
     useGetAccountQuery,
     useLogoutMutation,
+    useAddLinkMutation
 } = linktreeApi

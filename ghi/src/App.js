@@ -11,10 +11,10 @@ function App() {
   return (
     <BrowserRouter >
       <Nav />
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
-      <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }
