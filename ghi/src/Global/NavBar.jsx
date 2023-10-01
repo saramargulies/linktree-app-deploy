@@ -3,23 +3,24 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useGetAccountQuery, useLoginMutation, useLogoutMutation } from '../app/apiSlice'
 
 const NavBar = () => {
-    // const { data: account, isLoading } = useGetAccountQuery()
-    // const [logout] = useLogoutMutation()
+    const { data: account, isLoading } = useGetAccountQuery()
+    const [logout] = useLogoutMutation()
+    const [login] = useLoginMutation()
     const navigate = useNavigate()
 
     const logoutAndRedirect = () => {
-        // logout();
+        logout();
         navigate("/");
         window.location.reload(false);
       };
 
-    // if (isLoading) {
-    //     return null
-    // }
+    if (isLoading) {
+        return null
+    }
 
     return (
-        <nav className="navbar navbar-dark navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
+        <nav className="navbar navbar-dark bg-dark  navbar-expand-lg">
+            <div className="container-fluid bg-dark">
                 <Link className="navbar-brand" href="#">Linky</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -41,9 +42,11 @@ const NavBar = () => {
                     <li className="nav-item">
                     <Link className="nav-link" href="#">Login</Link>
                     </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">Logout</Link>
+                    {account && (
+                        <li className="nav-item">
+                        <button className="nav-link" onClick={logoutAndRedirect}>Logout</button>
                     </li>
+                    )}
                     <li className="nav-item">
                     <Link className="nav-link" href="#">Share</Link>
                     </li>
