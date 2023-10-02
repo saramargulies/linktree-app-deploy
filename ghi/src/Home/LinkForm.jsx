@@ -30,36 +30,45 @@ function LinkForm() {
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <p>Enter Link</p>
-          <form onSubmit={handleSubmit} id="review-form">
+    <div className="container">
+      <div className="row gx-5">
+        <div className="col">
+          <div className="">
+            <div className="card ">
+                    <div className="card-body">
+                        <p className="h4">Enter Link</p>
+                        <form onSubmit={handleSubmit} id="review-form">
 
-            <div className="mb-3">
-              <input
-                onChange={handleNameChange}
-                placeholder="Name"
-                name="review"
-                id="review"
-              ></input>
-            </div>
-            <div className="mb-3">
-              <input
-                onChange={handleLinkChange}
-                placeholder="Copy & paste URL here"
-                name="link"
-                id="link"
-              ></input>
-            </div>
-
-            <button disabled={isDisabled} className="btn btn-primary">
-              Submit
-            </button>
-          </form>
+                          <div className="">
+                            <input className="form-control"
+                              onChange={handleNameChange}
+                              placeholder="Name"
+                              name="review"
+                              id="review"
+                            ></input>
+                          </div>
+                          <div className="mb-3">
+                            <input className="form-control"
+                              onChange={handleLinkChange}
+                              placeholder="Copy & paste URL here"
+                              name="link"
+                              id="link"
+                            ></input>
+                          </div>
+                          <div className="mb-3">
+                            <button disabled={isDisabled} className="btn btn-primary">
+                            Submit
+                            </button>
+                          </div>
+                        
+                        </form>
+                    </div>
+                  </div>
+                </div>
+          </div>
         </div>
       </div>
-    </div>
+      
   );
 }
 

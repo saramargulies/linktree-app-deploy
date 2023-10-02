@@ -27,29 +27,45 @@ const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" href="#">Edit Links</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">View My Linky</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">Analytics</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">Sign Up</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">Login</Link>
-                    </li>
-                    {account && (
-                        <li className="nav-item">
-                        <button className="nav-link" onClick={logoutAndRedirect}>Logout</button>
-                    </li>
+                {account && (
+                        <div>
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to="#">Edit Links</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="#">View My Linky</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="#">Analytics</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="#">Share</Link>
+                             </li>
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={logoutAndRedirect}>Logout</button>
+                            </li>                    
+
+                        </div>
                     )}
-                    <li className="nav-item">
-                    <Link className="nav-link" href="#">Share</Link>
-                    </li>
+
+                    {!account && (
+                        <div>
+                            <li className="nav-item">
+                                <NavLink to="signup" className="nav-link">
+                                Sign Up
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                to="login"
+                                className="nav-link"
+                                >
+                                Login
+                                </NavLink>
+                            </li>
+                        </div>
+                        )}
+
                 </ul>
                 <form className="d-flex" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
