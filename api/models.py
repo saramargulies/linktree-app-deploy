@@ -1,5 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional
+from jwtdown_fastapi.authentication import Token
+
+
+class DuplicateAccountError(ValueError):
+    pass
 
 
 class AccountIn(BaseModel):
@@ -12,15 +17,27 @@ class AccountIn(BaseModel):
 
 class AccountOut(BaseModel):
     id: int
+    first_name: str
     last_name: str
     email: str
     username: str
-    password: str
-##We should not include raw password data in acc out -> need to watch riley auth video to redo this endpoint 
 
 
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
+
+
+class AccountForm(BaseModel):
+    username: str
+    password: str
+
+
+class AccountToken(Token):
+    account: AccountOut
+
+
+class HttpError(BaseModel):
+    detail: str
 
 class LinkIn(BaseModel):
     name: Optional[str]
