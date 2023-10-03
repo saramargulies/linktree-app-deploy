@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { useGetAccountQuery, useLoginMutation, useLogoutMutation } from '../app/apiSlice'
+import { useGetAccountQuery, useLogoutMutation } from '../app/apiSlice'
+import LoginForm from './LoginForm'
 
 const NavBar = () => {
     const { data: account, isLoading } = useGetAccountQuery()
     const [logout] = useLogoutMutation()
-    const [login] = useLoginMutation()
     const navigate = useNavigate()
 
     const logoutAndRedirect = () => {
@@ -56,15 +56,48 @@ const NavBar = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink
-                                to="login"
+                            <button
+                                type="button"
                                 className="nav-link"
-                                >
+                                style={{ backgroundColor: "white" }}
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                            >
                                 Login
-                                </NavLink>
+                            </button>
                             </li>
                         </div>
                         )}
+                        <div
+              className="modal fade"
+              id="staticBackdrop"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabIndex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                      Login
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <div>
+                        <LoginForm></LoginForm>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
                 </ul>
                 <form className="d-flex" role="search">
