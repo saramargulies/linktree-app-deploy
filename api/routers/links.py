@@ -20,7 +20,19 @@ def get_links(username: str, repo: LinkRepository = Depends()):
     return repo.get_links_by_account(username)
 
 
-# @router.delete("/links/{link_id}")
-# def delete_link(
-#     link_id: str,
-# )
+@router.delete("/links/{link_id}")
+def delete_link(
+    link_id: str,
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: LinkRepository = Depends(),
+)-> bool:
+    return repo.delete(link_id=link_id, username=account_data["username"])
+
+@router.put("/links/{link_id}")
+def update_link(
+    link_id: str,
+    link: LinkIn,
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: LinkRepository = Depends(),
+):
+    return repo.update(link=link, link_id=link_id, username=account_data["username"])
