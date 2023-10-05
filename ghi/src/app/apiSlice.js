@@ -61,6 +61,39 @@ export const linktreeApi = createApi({
             },
             invalidatesTags: ["Links"],
         }),
+        getLinksByUsername: builder.query({
+            query: (username) => ({
+              url: `links/${username}`,
+              credentials: "include",
+            }),
+            providesTags: ["Links"],
+          }),
+    // verify argument names in updateLink are correct & correspond to models/SQL statements after merge
+          updateLink: builder.mutation({
+            query: ({ link_id, name, link, locked, counter }) => {
+              const body = {
+                name: name,
+                link: link,
+                locked: locked,
+                counter: counter
+              };
+              return {
+                url: `/links/${link_id}`,
+                method: "PUT",
+                body,
+                credentials: "include",
+              };
+            },
+            invalidatesTags: ["Links"],
+          }),
+          deleteLink: builder.mutation({
+            query: (link_id) => ({
+              url: `/links/${link_id}`,
+              method: "DELETE",
+              credentials: "include",
+            }),
+            invalidatesTags: ["Links"],
+          }),
     })
 })
 
@@ -69,5 +102,7 @@ export const {
     useLoginMutation,
     useGetAccountQuery,
     useLogoutMutation,
-    useAddLinkMutation
+    useAddLinkMutation,
+    useGetLinksByUsernameQuery,
+    useUpdateLinkMutation,
 } = linktreeApi
