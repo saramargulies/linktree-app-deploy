@@ -40,6 +40,7 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
+
 class LinkIn(BaseModel):
     name: Optional[str]
     link: str

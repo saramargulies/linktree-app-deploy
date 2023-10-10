@@ -1,23 +1,22 @@
 from fastapi import APIRouter, Depends
-from models import TreeOut
+from models import TreeOut, ViewIn
 from typing import List
 from queries.trees import TreeRepository
 from authenticator import authenticator
-from datetime import datetime
+from datetime import datetime, date
 
 router = APIRouter()
 
 
-
 @router.get("/trees/{user_id}")
-def get_links(user_id: str, repo: TreeRepository = Depends()):
+def get_tree(user_id: str, repo: TreeRepository = Depends()):
     return repo.get(user_id)
 
-# @router.put("/trees/{user_id}")
-# def update_link(
-#     link_id: str,
-#     link: LinkIn,
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-#     repo: LinkRepository = Depends(),
-# ):
-#     return repo.update(link=link, link_id=link_id, user_id=account_data["user_id"])
+
+@router.put("/trees/{user_id}")
+def update_tree(
+    tree_id: str,
+    user_id: str,
+    repo: TreeRepository = Depends(),
+):
+    return repo.update(tree_id=tree_id, user_id=user_id)
