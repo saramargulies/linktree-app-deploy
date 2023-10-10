@@ -6,6 +6,7 @@ services:
     environment:
       CORS_HOST: http://localhost:3000
       DATABASE_URL: postgresql://example_user:secret@db/example
+      SIGNING_KEY: ${SIGNING_KEY}
       WAIT_HOSTS: db:5432
       PORT: 8000
     build:
