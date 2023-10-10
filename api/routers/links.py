@@ -12,12 +12,12 @@ def create_link(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LinkRepository = Depends(),
 ):
-    return repo.create(link, username=account_data["username"])
+    return repo.create(link, user_id=account_data["user_id"])
 
 
-@router.get("/links/{username}", response_model=List[LinkOut])
-def get_links(username: str, repo: LinkRepository = Depends()):
-    return repo.get_links_by_account(username)
+@router.get("/links/{user_id}", response_model=List[LinkOut])
+def get_links(user_id: str, repo: LinkRepository = Depends()):
+    return repo.get_links_by_account(user_id)
 
 
 @router.delete("/links/{link_id}")
@@ -26,7 +26,7 @@ def delete_link(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LinkRepository = Depends(),
 )-> bool:
-    return repo.delete(link_id=link_id, username=account_data["username"])
+    return repo.delete(link_id=link_id, user_id=account_data["user_id"])
 
 @router.put("/links/{link_id}")
 def update_link(
@@ -35,4 +35,4 @@ def update_link(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LinkRepository = Depends(),
 ):
-    return repo.update(link=link, link_id=link_id, username=account_data["username"])
+    return repo.update(link=link, link_id=link_id, user_id=account_data["user_id"])

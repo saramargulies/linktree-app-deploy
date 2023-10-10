@@ -10,6 +10,7 @@ from fastapi import (
 from authenticator import authenticator
 from models import AccountIn, AccountOut, AccountOutWithPassword, AccountForm, AccountToken, HttpError, DuplicateAccountError
 from queries.accounts import AccountRepository
+from queries.trees import TreeRepository
 
 
 router = APIRouter()
@@ -41,6 +42,7 @@ async def create_account(
     request: Request,
     response: Response,
     repo: AccountRepository = Depends(),
+    tree: TreeRepository = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
     try:
@@ -52,5 +54,6 @@ async def create_account(
         )
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
+    tree.create(account.user_id)
     return AccountToken(account=account, **token.dict())
 

@@ -4,39 +4,39 @@ from .pool import pool
 
 
 class LinkRepository:
-    def create(self, link: LinkIn, username: str) -> LinkOut:
+    def create(self, link: LinkIn, user_id: str) -> LinkOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     INSERT INTO links
-                        (name, link, username, counter, locked)
+                        (name, link, user_id, counter, locked)
                     VALUES
                         (%s, %s, %s, %s, %s)
-                    RETURNING id;
+                    RETURNING link_id;
                     """,
                     [
                         link.name,
                         link.link,
-                        username,
+                        user_id,
                         link.counter,
                         link.locked
                     ],
                 )
                 id = result.fetchone()[0]
                 old_data = link.dict()
-                return LinkOut(id=id, **old_data, username=username)
+                return LinkOut(link_id=id, **old_data, user_id=user_id)
             
-    def get_links_by_account(self, username: str) -> List[LinkOut]:
+    def get_links_by_account(self, user_id: str) -> List[LinkOut]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT id, name, link, username, counter, locked 
+                    SELECT link_id, name, link, user_id, counter, locked 
                     FROM links
-                    WHERE username = %s
+                    WHERE user_id = %s
                     """,
-                    [username]
+                    [user_id]
                 )
                 results = []
                 for row in db.fetchall():
@@ -44,22 +44,21 @@ class LinkRepository:
                     for i, column in enumerate(db.description):
                         link[column.name] = row[i]
                     results.append(link)
-                print(results)
                 return results
     
-    def delete(self, link_id: str, username: str):
+    def delete(self, link_id: str, user_id: str):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         DELETE FROM links
-                        WHERE id = %s 
-                        AND username = %s
+                        WHERE link_id = %s 
+                        AND user_id = %s
                         """,
                         [
                             link_id,
-                            username
+                            user_id
                         ]
                     )
                     return True
@@ -67,7 +66,7 @@ class LinkRepository:
             print(e)
             return False
                 
-    def update(self, link: LinkIn, link_id: str, username: str) -> LinkOut:
+    def update(self, link: LinkIn, link_id: str, user_id: str) -> LinkOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -77,7 +76,7 @@ class LinkRepository:
                         , link = %s
                         , counter = %s
                         , locked = %s
-                    WHERE id =%s AND username = %s
+                    WHERE link_id =%s AND user_id = %s
                     """,
                     [
                         link.name,
@@ -85,9 +84,9 @@ class LinkRepository:
                         link.counter,
                         link.locked,
                         link_id,
-                        username
+                        user_id
                     ],
                 )
                 old_data = link.dict()
-                return LinkOut(id=link_id, **old_data, username=username)
+                return LinkOut(link_id=link_id, **old_data, user_id=user_id)
 

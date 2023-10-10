@@ -1,6 +1,7 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
+from typing import Optional, List
 from jwtdown_fastapi.authentication import Token
+from datetime import date
 
 
 class DuplicateAccountError(ValueError):
@@ -16,7 +17,7 @@ class AccountIn(BaseModel):
 
 
 class AccountOut(BaseModel):
-    id: int
+    user_id: int
     first_name: str
     last_name: str
     email: str
@@ -47,9 +48,15 @@ class LinkIn(BaseModel):
 
 
 class LinkOut(BaseModel):
-    id: int
+    link_id: int
     name: str
     link: str
-    username: str
     counter: int
     locked: bool
+    user_id: int
+
+
+class TreeOut(BaseModel):
+    tree_id: int
+    views: List[date]
+    user_id: int

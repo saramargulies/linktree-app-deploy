@@ -1,4 +1,4 @@
-from models import AccountIn, AccountOut, AccountOutWithPassword
+from models import AccountIn, AccountOut, AccountOutWithPassword, TreeOut
 from .pool import pool
 from pydantic import BaseModel
 
@@ -10,7 +10,7 @@ class AccountRepository(BaseModel):
                 result = db.execute(
                     """
                     SELECT 
-                    id, first_name, last_name, email, username, password
+                    user_id, first_name, last_name, email, username, password
                     FROM accounts 
                     WHERE username = %s
                     """,
@@ -39,7 +39,7 @@ class AccountRepository(BaseModel):
                         (first_name, last_name, email, username, password)
                     VALUES
                         (%s, %s, %s, %s, %s)
-                    RETURNING id;
+                    RETURNING user_id;
                     """,
                     [
                         account.first_name,
@@ -49,7 +49,8 @@ class AccountRepository(BaseModel):
                         hashed_password,
                     ],
                 )
-                id = result.fetchone()[0]
+                user_id = result.fetchone()[0]
                 old_data = account.dict()
-                return AccountOut(id=id, **old_data)
+                return AccountOut(user_id=user_id, **old_data)
+
 
