@@ -2,13 +2,30 @@ steps = [
     [
         # "Up" SQL statement
         """
+        CREATE TABLE accounts (
+            user_id SERIAL PRIMARY KEY NOT NULL,
+            first_name VARCHAR(1000) NOT NULL,
+            last_name VARCHAR(1000) NOT NULL,
+            email VARCHAR(1000) NOT NULL,
+            username VARCHAR(1000) NOT NULL,
+            password VARCHAR(1000) NOT NULL
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE accounts;
+        """,
+    ],
+    [
+        # "Up" SQL statement
+        """
         CREATE TABLE links (
-            id SERIAL PRIMARY KEY NOT NULL,
+            link_id SERIAL PRIMARY KEY NOT NULL,
             name VARCHAR(1000),
             link VARCHAR(1000) NOT NULL,
-            username VARCHAR(1000) NOT NULL,
             counter INTEGER NOT NULL,
-            locked BOOLEAN NOT NULL
+            locked BOOLEAN NOT NULL,
+            user_id INTEGER REFERENCES accounts (user_id)
         );
         """,
         # "Down" SQL statement
@@ -19,17 +36,15 @@ steps = [
     [
         # "Up" SQL statement
         """
-        CREATE TABLE users (
-            id SERIAL PRIMARY KEY NOT NULL,
-            first_name VARCHAR(1000) NOT NULL,
-            last_name VARCHAR(1000) NOT NULL,
-            email VARCHAR(1000) NOT NULL,
-            username VARCHAR(1000) NOT NULL
+        CREATE TABLE tree (
+            tree_id SERIAL PRIMARY KEY NOT NULL,
+            views DATE[],
+            user_id INTEGER REFERENCES accounts (user_id)
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE users;
+        DROP TABLE tree;
         """,
     ],
 ]
