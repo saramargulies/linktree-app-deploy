@@ -1,8 +1,7 @@
 .history
-node_modules
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -174,7 +173,7 @@ cython_debug/
 **/build
 
 # misc
-.DS_Store
+**/.DS_Store
 .env.local
 .env.development.local
 .env.test.local
