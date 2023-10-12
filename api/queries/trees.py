@@ -1,4 +1,4 @@
-from models import TreeOut, ViewIn
+from models import TreeOut
 from .pool import pool
 from pydantic import BaseModel
 from datetime import datetime, date
