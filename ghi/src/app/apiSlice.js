@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const linktreeApi = createApi({
     reducerPath: "linktreeApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://localhost:8000",
+        baseUrl: "http://localhost:8000",
         credentials: "include"
     }),
     endpoints: (builder) => ({
@@ -32,7 +32,7 @@ export const linktreeApi = createApi({
         }),
         getAccount: builder.query({
             query: () => ({
-                url: '/token',
+                url: `/token`,
                 credentials: "include",
             }),
             transformResponse: (response) => (response ? response.account : null),
@@ -50,8 +50,11 @@ export const linktreeApi = createApi({
             query: ({ name, link }) => {
                 const body = {
                     name: name,
-                    link: link
+                    link: link,
+                    counter: 0,
+                    locked: false,
                 }
+                console.log(body)
                 return {
                     url: "/links",
                     method: "POST",
@@ -74,8 +77,8 @@ export const linktreeApi = createApi({
               const body = {
                 name: name,
                 link: link,
+                counter: counter,
                 locked: locked,
-                counter: counter
               };
               return {
                 url: `/links/${link_id}`,

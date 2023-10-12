@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models import TreeOut, ViewIn
+from models import TreeOut
 from typing import List
 from queries.trees import TreeRepository
 from authenticator import authenticator
