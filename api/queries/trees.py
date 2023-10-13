@@ -5,39 +5,38 @@ from datetime import datetime, date
 
 
 class TreeRepository(BaseModel):
-    def create(self, user_id: int) -> TreeOut:
+    def create(self, username: int) -> TreeOut:
         today = datetime.now()
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     INSERT INTO tree
-                        (user_id, views)
+                        (username, views)
                     VALUES
                         (%s, %s)
                     RETURNING tree_id, views;
                     """,
                     [
-                        user_id,
+                        username,
                         [today],
                     ],
                 )
                 fetched_result = result.fetchone()
                 tree_id = fetched_result[0]
                 views = fetched_result[1]
-                print("------------------", fetched_result[1], [today])
-                return TreeOut(tree_id=tree_id, views=views, user_id=user_id)
+                return TreeOut(tree_id=tree_id, views=views, username=username)
 
-    def get(self, user_id: str) -> TreeOut:
+    def get(self, username: str) -> TreeOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT tree_id, views, user_id
+                    SELECT tree_id, views, username
                     FROM tree
-                    WHERE user_id = %s
+                    WHERE username = %s
                     """,
-                    [user_id],
+                    [username],
                 )
                 results = []
                 for row in db.fetchall():
@@ -47,7 +46,7 @@ class TreeRepository(BaseModel):
                     results.append(link)
                 return results
 
-    def update(self, tree_id: str, user_id: str) -> TreeOut:
+    def update(self, username: str) -> TreeOut:
         view = datetime.now()
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -55,17 +54,18 @@ class TreeRepository(BaseModel):
                     """
                     UPDATE tree
                     SET views = ARRAY_APPEND(views, %s)
-                    WHERE tree_id =%s AND user_id = %s
+                    WHERE username = %s
                     RETURNING views
                     """,
                     [
                         view,
-                        tree_id,
-                        user_id,
+                        username,
                     ],
                 )
-                return TreeOut(
-                    tree_id=tree_id,
-                    user_id=user_id,
-                    views=result.fetchone()[0],
-                )
+                return result.fetchone()[0]
+
+            # TreeOut(
+            #         tree_id=tree_id,
+            #         user_id=user_id,
+            #         views=result.fetchone()[0],
+            #     )

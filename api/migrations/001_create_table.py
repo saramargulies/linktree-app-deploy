@@ -7,7 +7,7 @@ steps = [
             first_name VARCHAR(1000) NOT NULL,
             last_name VARCHAR(1000) NOT NULL,
             email VARCHAR(1000) NOT NULL,
-            username VARCHAR(1000) NOT NULL,
+            username VARCHAR(1000) NOT NULL UNIQUE,
             password VARCHAR(1000) NOT NULL
         );
         """,
@@ -39,7 +39,7 @@ steps = [
         CREATE TABLE tree (
             tree_id SERIAL PRIMARY KEY NOT NULL,
             views DATE[],
-            user_id INTEGER REFERENCES accounts (user_id)
+            username VARCHAR(1000) REFERENCES accounts (username)
         );
         """,
         # "Down" SQL statement
