@@ -13,10 +13,11 @@ def get_tree(user_id: str, repo: TreeRepository = Depends()):
     return repo.get(user_id)
 
 
-@router.put("/trees/{user_id}")
+@router.put("/trees/{username}")
 def update_tree(
-    tree_id: str,
-    user_id: str,
+    # tree_id: str,
+    # user_id: str,
+    username: str,
     repo: TreeRepository = Depends(),
 ):
-    return repo.update(tree_id=tree_id, user_id=user_id)
+    return repo.update(username=username)
