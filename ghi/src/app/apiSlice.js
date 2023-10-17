@@ -66,12 +66,11 @@ export const linktreeApi = createApi({
     }),
     getLinksByUserId: builder.query({
       query: (user_id) => ({
-        url: `links/${user_id}`,
+        url: `links`,
         credentials: "include",
       }),
       providesTags: ["Links"],
     }),
-    // verify argument names in updateLink are correct & correspond to models/SQL statements after merge
     updateLink: builder.mutation({
       query: ({ link_id, name, link, locked, counter }) => {
         const body = {
