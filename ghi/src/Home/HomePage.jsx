@@ -1,9 +1,17 @@
 import LinkForm from './LinkForm'
 import LinksPreview from './LinksPreview'
+import {
+    useGetAccountQuery,
+  } from "../app/apiSlice";
 
 
 const HomePage = () => {
 
+    const { data: account, isLoading } = useGetAccountQuery();
+
+    if (!account){
+        return <div>Please Log in!</div>
+      }
 
     return (
         <div className="m-5 d-flex flex-row justify-content-around">
