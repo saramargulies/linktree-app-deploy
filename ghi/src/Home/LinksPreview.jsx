@@ -39,6 +39,7 @@ const LinksPreview = () => {
                           <Link
                                   className="link stretched-link"
                                   to={link.link}
+                                  target="_blank"
                                 >
                                   {link.name}
                           </Link></div>
