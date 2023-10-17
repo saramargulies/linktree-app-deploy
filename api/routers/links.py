@@ -15,9 +15,10 @@ def create_link(
     return repo.create(link, user_id=account_data["user_id"])
 
 
-@router.get("/links/{user_id}", response_model=List[LinkOut])
-def get_links(user_id: str, repo: LinkRepository = Depends()):
-    return repo.get_links_by_account(user_id)
+@router.get("/links", response_model=List[LinkOut])
+def get_links(account_data: dict = Depends(authenticator.get_current_account_data), repo: LinkRepository = Depends()):
+    print(account_data)
+    return repo.get_links_by_account(user_id=account_data["user_id"])
 
 
 @router.delete("/links/{link_id}")

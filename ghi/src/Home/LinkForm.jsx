@@ -53,6 +53,7 @@ function LinkForm() {
                               placeholder="Copy & paste URL here"
                               name="link"
                               id="link"
+                              type="url"
                             ></input>
                           </div>
                           <div className="mb-3">

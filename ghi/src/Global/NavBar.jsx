@@ -3,7 +3,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   useGetAccountQuery,
   useLogoutMutation,
-  useGetTreesByUsernameQuery,
 } from "../app/apiSlice";
 import LoginForm from "./LoginForm";
 
@@ -22,7 +21,6 @@ const NavBar = () => {
     return null;
   }
 
-  console.log(account.username, isLoading);
   return (
     <nav className="navbar navbar-dark bg-dark  navbar-expand-lg">
       <div className="container-fluid bg-dark">

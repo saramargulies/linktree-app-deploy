@@ -1,44 +1,47 @@
 // import React, { useEffect, useState } from "react";
-import "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import {
   useGetLinksByUserIdQuery,
   useGetAccountQuery,
-  useGetTreesByUsernameQuery,
 } from "../app/apiSlice";
 
-const LinksPreview = () => {
-  const { data: account, isLoading: accountLoading } = useGetAccountQuery();
-  const { data: links, isLoading: linksLoading } = useGetLinksByUserIdQuery(
-    account.username
-  );
-  const { data: trees, isLoading: treesLoading } = useGetTreesByUsernameQuery(
-    account.username
-  );
-  console.log(trees, treesLoading);
 
-  if (linksLoading && accountLoading) {
-    return <div>Loading...</div>;
+const LinksPreview = () => {
+
+  const { data: account, isLoading: accountLoading } = useGetAccountQuery()
+  const { data: links, isLoading: linksLoading } = useGetLinksByUserIdQuery();
+  console.log(linksLoading)
+
+  if (linksLoading) {
+    return <div></div>
   }
 
   return (
     <>
-      <div className="page-container">
-        <div className="small-spacer"></div>
-        <h1>@{account.username}</h1>
-        <div className="m-5">
-          <table>
+        <div className="smartphone d-flex justify-content-center">
+        <div className="m-5 pt-5 ">
+          <div className="d-flex justify-content-center">
+          <h2>@{account.username}</h2>
+          </div>
+          <table className="mt-5 justify-content-center">
             <tbody>
               {links.map((link) => {
+                console.log(link)
                 return (
-                  <tr key={link.id}>
+                  <tr key={link.link_id}>
                     <td>
-                      <div className="card mb-3">
-                        <div className="row g-0">
-                          <div className="col-md-4 d-flex align-items-center card-title">
-                            {link.name && <div>{link.name}</div>}
-                          </div>
-                          <div className="card-body">{link.link}</div>
+                      <div className="card d-flex justify-content-center" style={{
+                        width: "16rem"
+                      }}>
+                        <div className="row">
+                          <div className="card-body d-flex justify-content-center">
+                          <Link
+                                  className="link stretched-link"
+                                  to={link.link}
+                                >
+                                  {link.name}
+                          </Link></div>
                         </div>
                       </div>
                     </td>
