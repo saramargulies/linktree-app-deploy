@@ -97,9 +97,9 @@ export const linktreeApi = createApi({
       invalidatesTags: ["Links"],
     }),
     getTreesByUsername: builder.query({
-      query: (username) => ({
-        url: `trees/${username}`,
-        // credentials: "include",
+      query: () => ({
+        url: `trees`,
+        credentials: "include",
       }),
       providesTags: ["Trees"],
     }),
