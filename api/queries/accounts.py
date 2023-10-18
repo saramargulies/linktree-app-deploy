@@ -1,4 +1,4 @@
-from models import AccountIn, AccountOut, AccountOutWithPassword, TreeOut
+from models import AccountIn, AccountOut, AccountOutWithPassword, DuplicateAccountError
 from .pool import pool
 from pydantic import BaseModel
 
@@ -20,15 +20,17 @@ class AccountRepository(BaseModel):
                 for row in db.fetchall():
                     for i, col in enumerate(db.description):
                         account[col.name] = row[i]
-                account["hashed_password"] = account["password"]
-                del account["password"]
 
                 if not account:
                     return None
+                account["hashed_password"] = account["password"]
+                del account["password"]
 
                 return AccountOutWithPassword(**account)
 
     def create(self, account: AccountIn, hashed_password: str) -> AccountOut:
+        if self.get(account.username) is not None:
+            raise DuplicateAccountError
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(

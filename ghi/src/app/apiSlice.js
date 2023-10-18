@@ -9,7 +9,7 @@ export const linktreeApi = createApi({
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (body) => ({
-        url: "/api/accounts",
+        url: "/accounts",
         method: "POST",
         body,
         credentials: "include",
@@ -117,7 +117,7 @@ export const linktreeApi = createApi({
 });
 
 export const {
-  useSignUpMutation,
+  useSignupMutation,
   useLoginMutation,
   useGetAccountQuery,
   useLogoutMutation,
