@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoginMutation } from "../app/apiSlice";
 import { useNavigate } from "react-router-dom";
-
+import AlertError from "./AlertError";
 
 function LoginForm() {
-
-  const navigate = useNavigate()
-  const [login] = useLoginMutation()
+  const navigate = useNavigate();
+  const [login, loginResult] = useLoginMutation();
+  const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  console.log("Login Result", loginResult);
+
+  useEffect(() => {
+    if (loginResult.error) {
+      console.log(loginResult?.error?.error);
+      setErrorMessage(loginResult?.error?.error);
+    }
+    if (loginResult.isSuccess) navigate("/");
+  }, [loginResult, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ name: password, link: username });
-    navigate('/')
+    login({ password, username });
+    navigate("/");
   };
 
   const handleLinkChange = (event) => {
@@ -26,38 +35,34 @@ function LoginForm() {
     setPassword(data);
   };
 
-
   return (
-
-                    <div className="card-body">
-                        <p className="h4"></p>
-                        <form onSubmit={handleSubmit} id="review-form">
-
-                          <div className="mb-3">
-                            <input className="form-control"
-                              onChange={handleNameChange}
-                              placeholder="Username"
-                              name="username"
-                              id="username"
-                            ></input>
-                          </div>
-                          <div className="mb-3">
-                            <input className="form-control"
-                              onChange={handleLinkChange}
-                              placeholder="Password"
-                              name="link"
-                              id="link"
-                            ></input>
-                          </div>
-                          <div className="mb-3">
-                            <button className="btn btn-primary">
-                            Login
-                            </button>
-                          </div>
-                        
-                        </form>
-                    </div>
-      
+    <div className="card-body">
+      <p className="h4"></p>
+      <form onSubmit={handleSubmit} id="review-form">
+        {errorMessage && <AlertError>{errorMessage}</AlertError>}
+        <div className="mb-3">
+          <input
+            className="form-control"
+            onChange={handleNameChange}
+            placeholder="Username"
+            name="username"
+            id="username"
+          ></input>
+        </div>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            onChange={handleLinkChange}
+            placeholder="Password"
+            name="link"
+            id="link"
+          ></input>
+        </div>
+        <div className="mb-3">
+          <button className="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -1,9 +1,6 @@
-import React from "react";
+import { React } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import {
-  useGetAccountQuery,
-  useLogoutMutation,
-} from "../app/apiSlice";
+import { useGetAccountQuery, useLogoutMutation } from "../app/apiSlice";
 import LoginForm from "./LoginForm";
 
 const NavBar = () => {
@@ -81,7 +78,6 @@ const NavBar = () => {
                   <button
                     type="button"
                     className="nav-link"
-                    style={{ backgroundColor: "white" }}
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
                   >
@@ -114,7 +110,8 @@ const NavBar = () => {
                   </div>
                   <div className="modal-body">
                     <div>
-                      <LoginForm></LoginForm>
+                      {!account && <LoginForm></LoginForm>}
+                      {account && <p>Thanks for logging in!</p>}
                     </div>
                   </div>
                 </div>

@@ -7,14 +7,14 @@ class AccountRepository(BaseModel):
     def get(self, username: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
-                    SELECT 
+                    SELECT
                     user_id, first_name, last_name, email, username, password
-                    FROM accounts 
+                    FROM accounts
                     WHERE username = %s
                     """,
-                    [username]
+                    [username],
                 )
                 account = {}
                 for row in db.fetchall():
@@ -23,12 +23,10 @@ class AccountRepository(BaseModel):
                 account["hashed_password"] = account["password"]
                 del account["password"]
 
-
                 if not account:
                     return None
 
                 return AccountOutWithPassword(**account)
-        
 
     def create(self, account: AccountIn, hashed_password: str) -> AccountOut:
         with pool.connection() as conn:
@@ -52,5 +50,3 @@ class AccountRepository(BaseModel):
                 user_id = result.fetchone()[0]
                 old_data = account.dict()
                 return AccountOut(user_id=user_id, **old_data)
-
-

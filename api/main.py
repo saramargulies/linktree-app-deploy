@@ -12,7 +12,10 @@ app.include_router(links.router, tags=["Links"])
 app.include_router(trees.router, tags=["Trees"])
 
 
-origins = [os.environ.get("CORS_HOST", "http://localhost:3000"), "http://localhost:3000/"]
+origins = [
+    os.environ.get("CORS_HOST", "http://localhost:3000"),
+    "http://localhost:3000/",
+]
 
 app.add_middleware(
     CORSMiddleware,
