@@ -9,12 +9,10 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  console.log("Login Result", loginResult);
 
   useEffect(() => {
     if (loginResult.error) {
-      console.log(loginResult?.error?.error);
-      setErrorMessage(loginResult?.error?.error);
+      setErrorMessage("Incorrect username or password");
     }
     if (loginResult.isSuccess) navigate("/");
   }, [loginResult, navigate]);
