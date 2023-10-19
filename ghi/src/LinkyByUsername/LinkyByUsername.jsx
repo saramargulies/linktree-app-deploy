@@ -4,7 +4,6 @@ import { useParams, Link } from "react-router-dom";
 import { useGetLinksByUsernameQuery, useIncrementCounterMutation, useUpdateTreeMutation, useGetAccountQuery } from "../app/apiSlice";
 
 const LinkyByUsername = () => {
-  console.log("rerender")
     let { username } = useParams()
 
   const { data: links, isLoading: linksLoading } = useGetLinksByUsernameQuery(username);
