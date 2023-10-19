@@ -16,7 +16,7 @@ const LinkyByUsername = () => {
     if (account == null || account.username != username){
     updateTree({username})
     }
-  }, [account])
+  }, [])
 
   if (linksLoading && accountLoading) {
     return <div></div>
