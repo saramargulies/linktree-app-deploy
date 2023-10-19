@@ -14,11 +14,11 @@ const LinksPreview = () => {
   return (
     <>
       <div className="smartphone d-flex justify-content-center">
-        <div className="m-5 pt-5 ">
+        <div className="pt-5 pb-5 overflow-scroll">
           <div className="d-flex justify-content-center">
             <h2>@{account.username}</h2>
           </div>
-          <table className="mt-5 justify-content-center">
+          <table className="table-fixed mt-5 justify-content-center">
             <tbody>
               {links.map((link) => {
                 return (
@@ -51,6 +51,7 @@ const LinksPreview = () => {
         </div>
         <div className="small-spacer"></div>
       </div>
+      
     </>
   );
 };

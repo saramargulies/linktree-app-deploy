@@ -1,28 +1,42 @@
-import LinkForm from './LinkForm'
-import LinksPreview from './LinksPreview'
-import {
-    useGetAccountQuery,
-  } from "../app/apiSlice";
-
+import LinkForm from "./LinkForm";
+import LinksPreview from "./LinksPreview";
+import { useGetAccountQuery, useGetLinksByUserIdQuery } from "../app/apiSlice";
+import EditLinkForm from "./EditLinkForm";
 
 const HomePage = () => {
+  const { data: account } = useGetAccountQuery();
+  const { data: links, isLoading: linksLoading } = useGetLinksByUserIdQuery();
 
-    const { data: account, isLoading } = useGetAccountQuery();
+  if (!account) {
+    return <div>Please Log in!</div>;
+  }
+  if (linksLoading) {
+    return <div></div>;
+  }
 
-    if (!account){
-        return <div>Please Log in!</div>
-      }
-
-    return (
-        <div className="m-5 d-flex flex-row justify-content-around">
-            <div className="flex-grow-1">
-                <LinkForm></LinkForm>
-            </div>
-            <div className="flex-fill">
-                <LinksPreview></LinksPreview>
-            </div>
+  return (
+    <div className="m-5 d-flex flex-row justify-content-around">
+      <div className="flex-grow">
+        <div className="flex-grow-1 row">
+          <LinkForm></LinkForm>
         </div>
-    )
-}
+        <div className="row">
+          {links.map((link) => {
+            return (
+              <div key={link.link_id}>
+                <EditLinkForm></EditLinkForm>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div>
+        <div className="flex-fill ">
+          <LinksPreview></LinksPreview>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;

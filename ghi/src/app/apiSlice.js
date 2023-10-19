@@ -54,7 +54,7 @@ export const linktreeApi = createApi({
           counter: 0,
           locked: false,
         };
-        console.log(body);
+
         return {
           url: "/links",
           method: "POST",

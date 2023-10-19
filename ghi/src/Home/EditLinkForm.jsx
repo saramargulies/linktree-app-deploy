@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAddLinkMutation } from "../app/apiSlice";
 
 
-function LinkForm() {
+function EditLinkForm({linkToEdit}) {
 
-  const [submitLink, submitLinkResponse] = useAddLinkMutation();
+  const [submitLink] = useAddLinkMutation();
   const [link, setLink] = useState("");
   const [name, setName] = useState("");
 
@@ -12,13 +12,6 @@ function LinkForm() {
     e.preventDefault();
     submitLink({ name, link });
   };
-  useEffect(() =>{
-  if (submitLinkResponse.isSuccess){
-    setLink("")
-    setName("")
-  }    
-  })
-
 
   const handleLinkChange = (event) => {
     const data = event.target.value;
@@ -43,7 +36,7 @@ function LinkForm() {
           <div className="">
             <div className="card ">
                     <div className="card-body">
-                        <p className="h4">Enter Link</p>
+                        <p className="h4">Edit Link</p>
                         <form onSubmit={handleSubmit} id="review-form">
 
                           <div className="">
@@ -52,7 +45,6 @@ function LinkForm() {
                               placeholder="Name"
                               name="review"
                               id="review"
-                              value={name}
                             ></input>
                           </div>
                           <div className="mb-3">
@@ -62,7 +54,6 @@ function LinkForm() {
                               name="link"
                               id="link"
                               type="url"
-                              value={link}
                             ></input>
                           </div>
                           <div className="mb-3">
@@ -82,4 +73,4 @@ function LinkForm() {
   );
 }
 
-export default LinkForm;
+export default EditLinkForm;
