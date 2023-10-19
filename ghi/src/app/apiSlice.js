@@ -76,7 +76,6 @@ export const linktreeApi = createApi({
         url: `links/${username}`,
         credentials: "include",
       }),
-      providesTags: ["Links"],
     }),
     updateLink: builder.mutation({
       query: ({ link_id, name, link, locked, counter }) => {
