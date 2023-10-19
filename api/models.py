@@ -63,3 +63,7 @@ class TreeOut(BaseModel):
     tree_id: int
     views: List[date]
     username: str
+
+
+class Counter(BaseModel):
+    counter: int

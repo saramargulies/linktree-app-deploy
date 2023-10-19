@@ -1,15 +1,25 @@
-import React from "react";
+import { useEffect } from "react";
 import "react-router-dom";
 import { useParams, Link } from "react-router-dom";
-import { useGetLinksByUsernameQuery } from "../app/apiSlice";
+import { useGetLinksByUsernameQuery, useIncrementCounterMutation, useUpdateTreeMutation, useGetAccountQuery } from "../app/apiSlice";
 
 const LinkyByUsername = () => {
+  console.log("rerender")
     let { username } = useParams()
 
   const { data: links, isLoading: linksLoading } = useGetLinksByUsernameQuery(username);
-  console.log(links)
+  const { data: account, isLoading: accountLoading } = useGetAccountQuery()
+  const [updateLink] = useIncrementCounterMutation()
+  const [updateTree] = useUpdateTreeMutation()
 
-  if (linksLoading) {
+
+  useEffect(() => {
+    if (account == null || account.username != username){
+    updateTree({username})
+    }
+  }, [account])
+
+  if (linksLoading && accountLoading) {
     return <div></div>
   }
   if (!links){
@@ -20,9 +30,17 @@ const LinkyByUsername = () => {
     )
   }
 
+
+  
+
+  const updateCounter = (link_id, newCount) => {
+    let counter = newCount + 1
+    updateLink({ link_id, counter })
+  }
+
   return (
     <>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mb-5 pb-5">
         <div className="m-5 pt-5 ">
           <div className="d-flex justify-content-center">
           <h2>@{username}</h2>
@@ -30,7 +48,6 @@ const LinkyByUsername = () => {
           <table className="mt-5 justify-content-center">
             <tbody>
               {links.map((link) => {
-                console.log(link)
                 return (
                   <tr key={link.link_id}>
                     <td>
@@ -43,6 +60,7 @@ const LinkyByUsername = () => {
                                   className="link stretched-link"
                                   to={link.link}
                                   target="_blank"
+                                  onClick={() => {updateCounter(link.link_id, link.counter )}}
                                 >
                                   {link.name}
                           </Link></div>

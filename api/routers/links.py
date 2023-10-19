@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models import LinkIn, LinkOut
+from models import LinkIn, LinkOut, Counter
 from typing import List
 from queries.links import LinkRepository
 from queries.accounts import AccountRepository
@@ -52,4 +52,14 @@ def update_link(
 ):
     return repo.update(
         link=link, link_id=link_id, user_id=account_data["user_id"]
+    )
+
+@router.put("/links/counter/{link_id}")
+def update_link(
+    link_id: str,
+    counter: Counter,
+    repo: LinkRepository = Depends(),
+):
+    return repo.incrementCounter(
+        link_id=link_id, counter=counter.counter
     )

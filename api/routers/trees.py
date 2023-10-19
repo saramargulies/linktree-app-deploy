@@ -18,8 +18,6 @@ def get_tree(
 
 @router.put("/trees/{username}")
 def update_tree(
-    # tree_id: str,
-    # user_id: str,
     username: str,
     repo: TreeRepository = Depends(),
 ):
