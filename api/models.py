@@ -7,6 +7,8 @@ from datetime import date
 class DuplicateAccountError(ValueError):
     pass
 
+class UserIdOut(BaseModel):
+    user_id: int
 
 class AccountIn(BaseModel):
     first_name: str

@@ -4,6 +4,7 @@ import HomePage from "./Home/HomePage";
 import Nav from "./Global/NavBar";
 import Footer from "./Global/Footer";
 import SignUp from "./Global/SignUp";
+import LinkyByUsername from "./LinkyByUsername/LinkyByUsername"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path=":username" element={<LinkyByUsername />} />
       </Routes>
       <Footer />
     </BrowserRouter>

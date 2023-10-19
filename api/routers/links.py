@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from models import LinkIn, LinkOut
 from typing import List
 from queries.links import LinkRepository
+from queries.accounts import AccountRepository
 from authenticator import authenticator
 
 router = APIRouter()
@@ -17,8 +18,16 @@ def create_link(
 
 @router.get("/links", response_model=List[LinkOut])
 def get_links(account_data: dict = Depends(authenticator.get_current_account_data), repo: LinkRepository = Depends()):
-    print(account_data)
     return repo.get_links_by_account(user_id=account_data["user_id"])
+
+
+@router.get("/links/{username}", response_model=List[LinkOut] | None)
+def get_links_by_username(username: str, links_repo: LinkRepository = Depends(), acc_repo: AccountRepository = Depends()):
+    user_id=acc_repo.get_user_id(username)
+    if user_id:
+        return links_repo.get_links_by_account(user_id=user_id.user_id)
+    else:
+        return None
 
 
 @router.delete("/links/{link_id}")
