@@ -13,9 +13,11 @@ A deployed version of this app can be found at: INSERT LINK HERE
 In order to get this application running locally, you can fork & clone this project down to your local machine. Open docker and run the following commands in order:
 
 `docker volume create linktree-app-data`
+
 `docker compose build`
+
 `docker compose up`
 
 ## Opening up the app on your machine
 
-After running the docker commands you can navigate to "https://localhost:3000" to see the front end and "https://localhost:8000/docs" to see the FastAPI/swagger for the back end endpoints.
+After running the docker commands you can navigate to "http://localhost:3000" to see the front end and "http://localhost:8000/docs" to see the FastAPI/swagger for the back end endpoints.
