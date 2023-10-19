@@ -1,4 +1,4 @@
-from models import LinkIn, LinkOut
+from models import LinkIn, LinkOut, Counter
 from typing import List
 from .pool import pool
 
@@ -89,4 +89,23 @@ class LinkRepository:
                 )
                 old_data = link.dict()
                 return LinkOut(link_id=link_id, **old_data, user_id=user_id)
+
+
+    def incrementCounter(self, link_id: str, counter: int):
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    UPDATE links 
+                    SET counter = %s
+                    WHERE link_id =%s
+                    RETURNING counter
+                    """,
+                    [
+                        counter,
+                        link_id,
+                    ],
+                )
+                counter=result.fetchone()[0]
+                return Counter(counter=counter)
 

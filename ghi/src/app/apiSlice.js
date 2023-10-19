@@ -71,6 +71,12 @@ export const linktreeApi = createApi({
       }),
       providesTags: ["Links"],
     }),
+    getLinksByUsername: builder.query({
+      query: (username) => ({
+        url: `links/${username}`,
+        credentials: "include",
+      }),
+    }),
     updateLink: builder.mutation({
       query: ({ link_id, name, link, locked, counter }) => {
         const body = {
@@ -84,6 +90,19 @@ export const linktreeApi = createApi({
           method: "PUT",
           body,
           credentials: "include",
+        };
+      },
+      invalidatesTags: ["Links"],
+    }),
+    incrementCounter: builder.mutation({
+      query: ({ link_id, counter }) => {
+        const body = {
+          counter: counter,
+        };
+        return {
+          url: `/links/counter/${link_id}`,
+          method: "PUT",
+          body,
         };
       },
       invalidatesTags: ["Links"],
@@ -111,12 +130,12 @@ export const linktreeApi = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: ["Trees"],
     }),
   }),
 });
 
 export const {
+  useGetLinksByUsernameQuery,
   useSignupMutation,
   useLoginMutation,
   useGetAccountQuery,
@@ -126,4 +145,5 @@ export const {
   useUpdateLinkMutation,
   useGetTreesByUsernameQuery,
   useUpdateTreeMutation,
+  useIncrementCounterMutation,
 } = linktreeApi;

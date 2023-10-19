@@ -21,9 +21,9 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark  navbar-expand-lg">
       <div className="container-fluid bg-dark">
-        <Link className="navbar-brand" href="#">
-          Linky
-        </Link>
+    <Link className="navbar-brand" to="/">
+      Linky
+    </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -38,14 +38,14 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {account && (
-              <div>
+              <>
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="#">
+                  <NavLink className="nav-link" to="/">
                     Edit Links
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">
+                  <Link className="nav-link" to={`/${account.username}`}>
                     View My Linky
                   </Link>
                 </li>
@@ -64,11 +64,11 @@ const NavBar = () => {
                     Logout
                   </button>
                 </li>
-              </div>
+              </>
             )}
 
             {!account && (
-              <div>
+              <>
                 <li className="nav-item">
                   <NavLink to="signup" className="nav-link">
                     Sign Up
@@ -84,7 +84,7 @@ const NavBar = () => {
                     Login
                   </button>
                 </li>
-              </div>
+              </>
             )}
             <div
               className="modal fade"

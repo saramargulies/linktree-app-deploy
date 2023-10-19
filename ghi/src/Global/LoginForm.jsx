@@ -14,7 +14,9 @@ function LoginForm() {
     if (loginResult.error) {
       setErrorMessage("Incorrect username or password");
     }
-    if (loginResult.isSuccess) navigate("/");
+    if (loginResult.isSuccess) {
+      navigate("/");
+    }
   }, [loginResult, navigate]);
 
   const handleSubmit = (e) => {
@@ -54,6 +56,7 @@ function LoginForm() {
             placeholder="Password"
             name="link"
             id="link"
+            type="password"
           ></input>
         </div>
         <div className="mb-3">

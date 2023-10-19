@@ -30,7 +30,7 @@ class TreeRepository(BaseModel):
     def get(self, username: str) -> TreeOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
                     SELECT tree_id, views, username
                     FROM tree

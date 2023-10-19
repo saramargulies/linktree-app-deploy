@@ -39,7 +39,6 @@ const Analytics = () => {
       amt: viewDict[key],
     });
   }
-  console.log(data);
 
   let sum = 0;
   links.map((link) => {
@@ -101,8 +100,10 @@ const Analytics = () => {
       <div className="d-flex justify-content-center">
         <table className="table mt-5 w-75">
           <thead>
-            <th></th>
-            <th className="d-flex justify-content-end">Clicks</th>
+            <tr>
+              <th></th>
+              <th className="d-flex justify-content-end">Clicks</th>
+            </tr>
           </thead>
           <tbody>
             {links.map((link) => {
