@@ -5,6 +5,8 @@ import Nav from "./Global/NavBar";
 import Footer from "./Global/Footer";
 import SignUp from "./Global/SignUp";
 import Analytics from "./Analytics/Analytics";
+import LinkyByUsername from "./LinkyByUsername/LinkyByUsername"
+
 
 function App() {
   // const domain = /https:\/\/[^/]+/;
@@ -15,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path=":username" element={<LinkyByUsername />} />
         <Route path="analytics" element={<Analytics />} />
       </Routes>
       <Footer />

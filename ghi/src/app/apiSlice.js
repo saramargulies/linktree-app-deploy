@@ -71,6 +71,12 @@ export const linktreeApi = createApi({
       }),
       providesTags: ["Links"],
     }),
+    getLinksByUsername: builder.query({
+      query: (username) => ({
+        url: `links/${username}`,
+        credentials: "include",
+      }),
+    }),
     updateLink: builder.mutation({
       query: ({ link_id, name, link, locked, counter }) => {
         const body = {
@@ -117,6 +123,7 @@ export const linktreeApi = createApi({
 });
 
 export const {
+  useGetLinksByUsernameQuery,
   useSignupMutation,
   useLoginMutation,
   useGetAccountQuery,
