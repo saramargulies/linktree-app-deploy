@@ -6,6 +6,7 @@ from authenticator import authenticator
 
 router = APIRouter()
 
+
 @router.post("/links", response_model=LinkOut)
 def create_link(
     link: LinkIn,
@@ -16,8 +17,10 @@ def create_link(
 
 
 @router.get("/links", response_model=List[LinkOut])
-def get_links(account_data: dict = Depends(authenticator.get_current_account_data), repo: LinkRepository = Depends()):
-    print(account_data)
+def get_links(
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: LinkRepository = Depends(),
+):
     return repo.get_links_by_account(user_id=account_data["user_id"])
 
 
@@ -26,8 +29,9 @@ def delete_link(
     link_id: str,
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LinkRepository = Depends(),
-)-> bool:
+) -> bool:
     return repo.delete(link_id=link_id, user_id=account_data["user_id"])
+
 
 @router.put("/links/{link_id}")
 def update_link(
@@ -36,4 +40,6 @@ def update_link(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LinkRepository = Depends(),
 ):
-    return repo.update(link=link, link_id=link_id, user_id=account_data["user_id"])
+    return repo.update(
+        link=link, link_id=link_id, user_id=account_data["user_id"]
+    )

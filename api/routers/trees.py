@@ -8,9 +8,12 @@ from datetime import datetime, date
 router = APIRouter()
 
 
-@router.get("/trees/{user_id}")
-def get_tree(user_id: str, repo: TreeRepository = Depends()):
-    return repo.get(user_id)
+@router.get("/trees")
+def get_tree(
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: TreeRepository = Depends(),
+):
+    return repo.get(username=account_data["username"])
 
 
 @router.put("/trees/{username}")
