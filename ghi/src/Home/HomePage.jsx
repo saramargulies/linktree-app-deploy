@@ -1,7 +1,7 @@
 import LinkForm from "./LinkForm";
 import LinksPreview from "./LinksPreview";
 import { useGetAccountQuery, useGetLinksByUserIdQuery } from "../app/apiSlice";
-import EditLinkForm from "./EditLinkForm";
+import EditLinkCard from "./EditLinkCard";
 
 const HomePage = () => {
   const { data: account } = useGetAccountQuery();
@@ -21,10 +21,10 @@ const HomePage = () => {
           <LinkForm></LinkForm>
         </div>
         <div className="row">
-          {links.map((link) => {
+          {links?.map((link) => {
             return (
               <div key={link.link_id}>
-                <EditLinkForm></EditLinkForm>
+                <EditLinkCard linkToEdit={link}></EditLinkCard>
               </div>
             );
           })}

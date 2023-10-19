@@ -7,7 +7,7 @@ const LinksPreview = () => {
   const { data: account, isLoading: accountLoading } = useGetAccountQuery();
   const { data: links, isLoading: linksLoading } = useGetLinksByUserIdQuery();
 
-  if (linksLoading) {
+  if (linksLoading || accountLoading) {
     return <div></div>;
   }
 
@@ -51,7 +51,6 @@ const LinksPreview = () => {
         </div>
         <div className="small-spacer"></div>
       </div>
-      
     </>
   );
 };

@@ -146,4 +146,5 @@ export const {
   useGetTreesByUsernameQuery,
   useUpdateTreeMutation,
   useIncrementCounterMutation,
+  useDeleteLinkMutation,
 } = linktreeApi;
