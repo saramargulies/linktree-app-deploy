@@ -37,10 +37,10 @@ function EditLinkForm({ linkToEdit, isSubmitted }) {
 
   useEffect(() => {
     if (!locked) {
-      setHidden("Hide");
+      setHidden("Visible");
       setHideClass("btn btn-secondary");
     } else {
-      setHidden("Hidden");
+      setHidden("Invisible");
       setHideClass("btn btn-outline-secondary");
     }
   });

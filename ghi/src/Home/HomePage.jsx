@@ -20,10 +20,10 @@ const HomePage = () => {
         <div className="flex-grow-1 row">
           <LinkForm></LinkForm>
         </div>
-        <div className="row">
+        <div className="row pt-4">
           {links?.map((link) => {
             return (
-              <div key={link.link_id}>
+              <div className="d-flex justify-content-center pe-4" key={link.link_id}>
                 <EditLinkCard linkToEdit={link}></EditLinkCard>
               </div>
             );
