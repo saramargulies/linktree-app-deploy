@@ -33,11 +33,11 @@ function LinkForm() {
   }
 
   return (
-    <div className="container">
+    <div className="container m">
       <div className="row gx-5">
         <div className="col">
           <div className="">
-            <div className="card ">
+            <div className="card me-4">
               <div className="card-body">
                 <p className="h4">Enter Link</p>
                 <form onSubmit={handleSubmit} id="review-form">

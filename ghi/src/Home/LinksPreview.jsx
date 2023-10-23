@@ -20,31 +20,33 @@ const LinksPreview = () => {
           </div>
           <table className="table-fixed mt-5 justify-content-center">
             <tbody>
-              {links.map((link) => {
-                return (
-                  <tr key={link.link_id}>
-                    <td>
-                      <div
-                        className="card d-flex justify-content-center"
-                        style={{
-                          width: "16rem",
-                        }}
-                      >
-                        <div className="row">
-                          <div className="card-body d-flex justify-content-center">
-                            <Link
-                              className="link stretched-link"
-                              to={link.link}
-                              target="_blank"
-                            >
-                              {link.name}
-                            </Link>
+              {links?.map((link) => {
+                if (!link.locked) {
+                  return (
+                    <tr key={link.link_id}>
+                      <td>
+                        <div
+                          className="card d-flex justify-content-center"
+                          style={{
+                            width: "16rem",
+                          }}
+                        >
+                          <div className="row">
+                            <div className="card-body d-flex justify-content-center">
+                              <Link
+                                className="link stretched-link"
+                                to={link.link}
+                                target="_blank"
+                              >
+                                {link.name}
+                              </Link>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
+                      </td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>

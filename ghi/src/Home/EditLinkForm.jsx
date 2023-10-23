@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useAddLinkMutation } from "../app/apiSlice";
+import { useUpdateLinkMutation } from "../app/apiSlice";
 
-function EditLinkForm() {
-  const [submitLink, submitLinkResponse] = useAddLinkMutation();
-  const [link, setLink] = useState("");
-  const [name, setName] = useState("");
+function EditLinkForm({ linkToEdit, isSubmitted }) {
+  const [submitLink, submitLinkResponse] = useUpdateLinkMutation();
+  const [link_id] = useState(linkToEdit.link_id);
+  const [link, setLink] = useState(linkToEdit.link);
+  const [name, setName] = useState(linkToEdit.name);
+  const [counter] = useState(linkToEdit.counter);
+  const [locked, setLocked] = useState(linkToEdit.locked);
+  const [hidden, setHidden] = useState("");
+  const [hideClass, setHideClass] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitLink({ name, link });
+    submitLink({ link_id, name, link, counter, locked });
   };
   useEffect(() => {
     if (submitLinkResponse.isSuccess) {
-      setLink("");
-      setName("");
+      isSubmitted();
     }
   }, [submitLinkResponse.isSuccess]);
 
@@ -27,52 +31,58 @@ function EditLinkForm() {
     setName(data);
   };
 
-  let isDisabled = false;
-  if (typeof rating == "string") {
-    isDisabled = true;
-  }
+  const handleLockedChange = () => {
+    setLocked((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (!locked) {
+      setHidden("Hide");
+      setHideClass("btn btn-secondary");
+    } else {
+      setHidden("Hidden");
+      setHideClass("btn btn-outline-secondary");
+    }
+  });
 
   return (
-    <div className="container">
-      <div className="row gx-5">
-        <div className="col">
-          <div className="">
-            <div className="card ">
-              <div className="card-body">
-                <p className="h4">Enter Link</p>
-                <form onSubmit={handleSubmit} id="review-form">
-                  <div className="">
-                    <input
-                      className="form-control"
-                      onChange={handleNameChange}
-                      placeholder="Name"
-                      name="review"
-                      id="review"
-                      value={name}
-                    ></input>
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      className="form-control"
-                      onChange={handleLinkChange}
-                      placeholder="Copy & paste URL here"
-                      name="link"
-                      id="link"
-                      type="url"
-                      value={link}
-                    ></input>
-                  </div>
-                  <div className="mb-3">
-                    <button disabled={isDisabled} className="btn btn-primary">
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+    <div className="card-body">
+      <p className="h4">Edit Link</p>
+      <form onSubmit={handleSubmit} id="review-form">
+        <div className="">
+          <input
+            className="form-control"
+            onChange={handleNameChange}
+            placeholder="Name"
+            name="name"
+            id="name"
+            value={name}
+          ></input>
         </div>
-      </div>
+        <div className="mb-3">
+          <input
+            className="form-control"
+            onChange={handleLinkChange}
+            placeholder="Copy & paste URL here"
+            name="link"
+            id="link"
+            type="url"
+            value={link}
+          ></input>
+        </div>
+
+        <div className="mb-3">
+          <button
+            type="button"
+            className={hideClass}
+            onClick={handleLockedChange}
+            value={locked}
+          >
+            {hidden}
+          </button>
+          <button className="btn btn-primary">Save</button>
+        </div>
+      </form>
     </div>
   );
 }

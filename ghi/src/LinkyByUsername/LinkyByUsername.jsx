@@ -49,33 +49,35 @@ const LinkyByUsername = () => {
           <table className="mt-5 justify-content-center">
             <tbody>
               {links.map((link) => {
-                return (
-                  <tr key={link.link_id}>
-                    <td>
-                      <div
-                        className="card d-flex justify-content-center"
-                        style={{
-                          width: "30rem",
-                        }}
-                      >
-                        <div className="row">
-                          <div className="card-body d-flex justify-content-center">
-                            <Link
-                              className="link stretched-link"
-                              to={link.link}
-                              target="_blank"
-                              onClick={() => {
-                                updateCounter(link.link_id, link.counter);
-                              }}
-                            >
-                              {link.name}
-                            </Link>
+                if (!link.locked) {
+                  return (
+                    <tr key={link.link_id}>
+                      <td>
+                        <div
+                          className="card d-flex justify-content-center"
+                          style={{
+                            width: "30rem",
+                          }}
+                        >
+                          <div className="row">
+                            <div className="card-body d-flex justify-content-center">
+                              <Link
+                                className="link stretched-link"
+                                to={link.link}
+                                target="_blank"
+                                onClick={() => {
+                                  updateCounter(link.link_id, link.counter);
+                                }}
+                              >
+                                {link.name}
+                              </Link>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                );
+                      </td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>
