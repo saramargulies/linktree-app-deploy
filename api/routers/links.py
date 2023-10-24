@@ -26,8 +26,12 @@ def get_links(
 
 
 @router.get("/links/{username}", response_model=List[LinkOut] | None)
-def get_links_by_username(username: str, links_repo: LinkRepository = Depends(), acc_repo: AccountRepository = Depends()):
-    user_id=acc_repo.get_user_id(username)
+def get_links_by_username(
+    username: str,
+    links_repo: LinkRepository = Depends(),
+    acc_repo: AccountRepository = Depends(),
+):
+    user_id = acc_repo.get_user_id(username)
     if user_id:
         return links_repo.get_links_by_account(user_id=user_id.user_id)
     else:
@@ -54,12 +58,11 @@ def update_link(
         link=link, link_id=link_id, user_id=account_data["user_id"]
     )
 
-@router.put("/links/counter/{link_id}")
+
+@router.put("/links/counter/{link_id}", response_model=Counter)
 def update_link(
     link_id: str,
     counter: Counter,
     repo: LinkRepository = Depends(),
 ):
-    return repo.incrementCounter(
-        link_id=link_id, counter=counter.counter
-    )
+    return repo.incrementCounter(link_id=link_id, counter=counter.counter)

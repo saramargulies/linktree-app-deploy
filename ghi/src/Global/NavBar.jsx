@@ -15,7 +15,6 @@ const NavBar = () => {
   const logoutAndRedirect = () => {
     logout();
     navigate("/");
-    window.location.reload(false);
   };
 
   if (isLoading) {

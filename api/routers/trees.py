@@ -8,7 +8,7 @@ from datetime import datetime, date
 router = APIRouter()
 
 
-@router.get("/trees")
+@router.get("/trees", response_model=List[TreeOut])
 def get_tree(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: TreeRepository = Depends(),
@@ -16,7 +16,7 @@ def get_tree(
     return repo.get(username=account_data["username"])
 
 
-@router.put("/trees/{username}")
+@router.put("/trees/{username}", response_model=List[date])
 def update_tree(
     username: str,
     repo: TreeRepository = Depends(),
