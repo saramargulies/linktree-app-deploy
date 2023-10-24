@@ -1,12 +1,16 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useGetAccountQuery, useLogoutMutation } from "../app/apiSlice";
 import LoginForm from "./LoginForm";
+import AlertSuccess from "./AlertSuccess";
+
 
 const NavBar = () => {
   const { data: account, isLoading } = useGetAccountQuery();
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
+  const [successAlert, setSuccessAlert] = useState(false)
+
 
   const logoutAndRedirect = () => {
     logout();
@@ -55,9 +59,14 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">
+                  <button className="nav-link" id="liveAlertBtn" onClick={() => {
+                    navigator.clipboard.writeText(
+                      `http://localhost:3000/${account.username}`)
+                      setSuccessAlert(true)
+                    }}>
                     Share
-                  </Link>
+                  </button>
+                      {successAlert && <AlertSuccess></AlertSuccess>}
                 </li>
                 <li className="nav-item">
                   <button className="nav-link" onClick={logoutAndRedirect}>
@@ -118,17 +127,6 @@ const NavBar = () => {
               </div>
             </div>
           </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </div>
     </nav>

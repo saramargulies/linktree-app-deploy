@@ -28,7 +28,6 @@ const SignUp = () => {
       setErrorMessage("Password does not match confirmation");
       return;
     }
-    console.log({ first_name, last_name, email, username, password })
     signup({ first_name, last_name, email, username, password });
   };
   return (
