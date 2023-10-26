@@ -7,8 +7,8 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from api.authenticator import authenticator
-from api.models import (
+from authenticator import authenticator
+from models import (
     AccountIn,
     AccountOut,
     AccountOutWithPassword,
@@ -17,8 +17,8 @@ from api.models import (
     HttpError,
     DuplicateAccountError,
 )
-from api.queries.accounts import AccountRepository
-from api.queries.trees import TreeRepository
+from queries.accounts import AccountRepository
+from queries.trees import TreeRepository
 
 
 router = APIRouter()

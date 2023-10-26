@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
-from api.main import app
-from api.queries.trees import TreeRepository
-from api.models import TreeOut
-from api.authenticator import authenticator
+from main import app
+from queries.trees import TreeRepository
+from models import TreeOut
+from authenticator import authenticator
 
 client = TestClient(app)
 

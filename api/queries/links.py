@@ -1,4 +1,4 @@
-from api.models import LinkIn, LinkOut, Counter
+from models import LinkIn, LinkOut, Counter
 from typing import List
 from .pool import pool
 

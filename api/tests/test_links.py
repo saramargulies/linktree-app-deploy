@@ -1,9 +1,9 @@
 from fastapi.testclient import TestClient
-from api.main import app
-from api.queries.links import LinkRepository
-from api.queries.accounts import AccountRepository
-from api.models import LinkIn
-from api.authenticator import authenticator
+from main import app
+from queries.links import LinkRepository
+from queries.accounts import AccountRepository
+from models import LinkIn
+from authenticator import authenticator
 
 client = TestClient(app)
 
