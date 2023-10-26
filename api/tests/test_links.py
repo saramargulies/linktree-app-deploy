@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.links import LinkRepository
 from queries.accounts import AccountRepository
-from models import LinkIn
+from models import LinkIn, UserIdOut
 from authenticator import authenticator
 
 client = TestClient(app)
@@ -20,7 +20,7 @@ def fake_get_current_account_data():
 
 class TestAccRepo:
     def get_user_id(self, username: str):
-        return {"user_id": 0}
+        return UserIdOut(user_id=0)
 
 
 class TestLinkRepo:
