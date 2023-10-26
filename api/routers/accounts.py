@@ -19,6 +19,7 @@ from models import (
 )
 from queries.accounts import AccountRepository
 from queries.trees import TreeRepository
+from typing import Union
 
 
 router = APIRouter()
@@ -31,7 +32,7 @@ async def get_protected(
     return True
 
 
-@router.get("/token", response_model="AccountToken | None")
+@router.get("/token", response_model=Union[AccountToken, None])
 async def get_token(
     request: Request,
     account: AccountOut = Depends(authenticator.try_get_current_account_data),
@@ -44,7 +45,7 @@ async def get_token(
         }
 
 
-@router.post("/accounts", response_model="AccountToken | HttpError")
+@router.post("/accounts", response_model=Union[AccountToken, HttpError])
 async def create_account(
     info: AccountIn,
     request: Request,
