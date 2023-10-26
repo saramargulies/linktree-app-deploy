@@ -18,7 +18,7 @@ def fake_get_current_account_data():
     }
 
 class TestAccRepo:
-    def get_user_id(username: str):
+    def get_user_id(self, username: str):
         return {
             "user_id": 0
         }
