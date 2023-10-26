@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from api.main import app
-from queries.trees import TreeRepository
+from api.queries.trees import TreeRepository
 from api.models import TreeOut
 from api.authenticator import authenticator
 

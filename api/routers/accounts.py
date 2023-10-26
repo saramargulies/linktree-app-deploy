@@ -17,8 +17,8 @@ from api.models import (
     HttpError,
     DuplicateAccountError,
 )
-from queries.accounts import AccountRepository
-from queries.trees import TreeRepository
+from api.queries.accounts import AccountRepository
+from api.queries.trees import TreeRepository
 
 
 router = APIRouter()
