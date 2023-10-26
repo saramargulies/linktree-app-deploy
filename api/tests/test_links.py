@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from api.main import app
 from api.queries.links import LinkRepository
+from api.queries.accounts import AccountRepository
 from api.models import LinkIn
 from api.authenticator import authenticator
 
@@ -118,9 +119,10 @@ def test_get_links_by_account():
 
 def test_get_links_by_username():
     app.dependency_overrides[LinkRepository] = TestLinkRepo
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = fake_get_current_account_data
+    app.dependency_overrides[AccountRepository] = fake_get_current_account_data
+    # app.dependency_overrides[
+    #     authenticator.get_current_account_data
+    # ] = fake_get_current_account_data
 
     result = client.get("/links/string")
     data = result.json()
@@ -134,7 +136,7 @@ def test_get_links_by_username():
             "link": "string",
             "counter": 0,
             "locked": True,
-            "user_id": 1,
+            "user_id": 0,
         }
     ]
 
