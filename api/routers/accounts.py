@@ -31,7 +31,7 @@ async def get_protected(
     return True
 
 
-@router.get("/token", response_model=AccountToken | None)
+@router.get("/token", response_model="AccountToken | None")
 async def get_token(
     request: Request,
     account: AccountOut = Depends(authenticator.try_get_current_account_data),
@@ -44,7 +44,7 @@ async def get_token(
         }
 
 
-@router.post("/accounts", response_model=AccountToken | HttpError)
+@router.post("/accounts", response_model="AccountToken | HttpError")
 async def create_account(
     info: AccountIn,
     request: Request,
