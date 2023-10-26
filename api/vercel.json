@@ -7,7 +7,6 @@
     ],
     "routes": [
       {
-        "api": "/(.*)",
         "dest": "main.py"
       }
     ]
