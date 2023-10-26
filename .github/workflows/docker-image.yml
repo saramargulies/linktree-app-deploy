@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker compose build
     - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -26,6 +29,3 @@ jobs:
       run: |
         pip install pytest pytest-cov
         pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker compose build
