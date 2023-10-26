@@ -17,12 +17,10 @@ def fake_get_current_account_data():
         "username": "sara",
     }
 
+
 class TestAccRepo:
     def get_user_id(self, username: str):
-        return (user_id = {
-            "user_id": 0
-        })
-
+        return {"user_id": {"user_id": 0}}
 
 
 class TestLinkRepo:
