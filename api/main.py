@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import accounts, links, trees
+from api.routers import accounts, links, trees
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
