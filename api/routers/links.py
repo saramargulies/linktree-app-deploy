@@ -4,6 +4,7 @@ from typing import List
 from queries.links import LinkRepository
 from queries.accounts import AccountRepository
 from authenticator import authenticator
+from typing import Union
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ def get_links(
     return repo.get_links_by_account(user_id=account_data["user_id"])
 
 
-@router.get("/links/{username}", response_model=List[LinkOut] | None)
+@router.get("/links/{username}", response_model=Union[List[LinkOut], None])
 def get_links_by_username(
     username: str,
     links_repo: LinkRepository = Depends(),
