@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
-from models import LinkIn, LinkOut, Counter
+from api.models import LinkIn, LinkOut, Counter
 from typing import List
 from queries.links import LinkRepository
 from queries.accounts import AccountRepository
-from authenticator import authenticator
+from api.authenticator import authenticator
 
 router = APIRouter()
 

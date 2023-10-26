@@ -7,8 +7,8 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from authenticator import authenticator
-from models import (
+from api.authenticator import authenticator
+from api.models import (
     AccountIn,
     AccountOut,
     AccountOutWithPassword,

@@ -1,4 +1,4 @@
-from models import AccountIn, AccountOut, AccountOutWithPassword, DuplicateAccountError, UserIdOut
+from api.models import AccountIn, AccountOut, AccountOutWithPassword, DuplicateAccountError, UserIdOut
 from .pool import pool
 from pydantic import BaseModel
 

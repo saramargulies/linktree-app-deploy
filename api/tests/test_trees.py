@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
 from api.main import app
 from queries.trees import TreeRepository
-from models import TreeOut
-from authenticator import authenticator
+from api.models import TreeOut
+from api.authenticator import authenticator
 
 client = TestClient(app)
 
@@ -55,10 +55,9 @@ def test_update():
     data = result.json()
 
     assert data == [
-            "2023-10-19",
-            "2023-10-19",
-            "2023-10-19",
-        ]
-
+        "2023-10-19",
+        "2023-10-19",
+        "2023-10-19",
+    ]
 
     assert result.status_code == 200

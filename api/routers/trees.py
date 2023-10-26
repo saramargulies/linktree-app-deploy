@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from models import TreeOut
+from api.models import TreeOut
 from typing import List
 from queries.trees import TreeRepository
-from authenticator import authenticator
+from api.authenticator import authenticator
 from datetime import datetime, date
 
 router = APIRouter()
