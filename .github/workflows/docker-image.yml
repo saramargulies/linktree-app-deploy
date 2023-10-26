@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: pytests
 
 on:
   push:
@@ -14,9 +14,9 @@ jobs:
     env:
       DATABASE_URL: "doesntmatter"
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker compose build
+    # - uses: actions/checkout@v3
+    # - name: Build the Docker image
+    #   run: docker compose build
     - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
