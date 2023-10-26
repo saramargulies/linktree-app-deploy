@@ -17,6 +17,13 @@ def fake_get_current_account_data():
         "username": "sara",
     }
 
+class TestAccRepo:
+    def get_user_id(username: str):
+        return {
+            "user_id": 0
+        }
+
+
 
 class TestLinkRepo:
     def create(self, link: LinkIn, user_id: int):
@@ -119,7 +126,7 @@ def test_get_links_by_account():
 
 def test_get_links_by_username():
     app.dependency_overrides[LinkRepository] = TestLinkRepo
-    app.dependency_overrides[AccountRepository] = fake_get_current_account_data
+    app.dependency_overrides[AccountRepository] = TestAccRepo
     # app.dependency_overrides[
     #     authenticator.get_current_account_data
     # ] = fake_get_current_account_data
