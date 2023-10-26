@@ -32,6 +32,7 @@ def get_links_by_username(
     acc_repo: AccountRepository = Depends(),
 ):
     user_id = acc_repo.get_user_id(username)
+    print(user_id)
     if user_id:
         return links_repo.get_links_by_account(user_id=user_id.user_id)
     else:
