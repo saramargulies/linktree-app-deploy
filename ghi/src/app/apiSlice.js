@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const linktreeApi = createApi({
   reducerPath: "linktreeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000",
+    baseUrl: "https://linky-app-fastapi-sara-margulies-projects.vercel.app",
     credentials: "include",
   }),
   endpoints: (builder) => ({
