@@ -15,7 +15,8 @@ app.include_router(trees.router, tags=["Trees"])
 origins = [
     os.environ.get("CORS_HOST", "http://localhost:3000"),
     "http://localhost:3000/",
-    "https://linktree-app-lake.vercel.app"
+    "https://linktree-app-lake.vercel.app",
+    "https://linky-frontend.vercel.app/"
 ]
 
 app.add_middleware(
