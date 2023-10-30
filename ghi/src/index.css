@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -26,7 +26,7 @@ code {
 
 /* The horizontal line on the top of the device */
 .smartphone:before {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 5px;
@@ -40,7 +40,7 @@ code {
 
 /* The circle on the bottom of the device */
 .smartphone:after {
-  content: '';
+  content: "";
   display: block;
   width: 35px;
   height: 35px;
@@ -57,4 +57,58 @@ code {
   width: 360px;
   height: 640px;
   background: white;
+}
+
+.masthead-logo {
+  width: 13rem;
+}
+
+.divider-custom {
+  margin: 1.25rem 0 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider-custom .divider-custom-line:first-child {
+  margin-right: 1rem;
+}
+.divider-custom .divider-custom-line:last-child {
+  margin-left: 1rem;
+}
+.divider-custom .divider-custom-icon {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+.divider-custom.divider-light .divider-custom-line {
+  background-color: #fff;
+}
+.divider-custom.divider-light .divider-custom-icon {
+  color: #fff;
+}
+
+.divider-custom .divider-custom-icon {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+.divider-custom.divider-light .divider-custom-line {
+  background-color: #fff;
+}
+.divider-custom.divider-light .divider-custom-icon {
+  color: #fff;
+}
+.masthead-subheading {
+  font-size: 1.25rem;
+}
+
+#btn {
+  border-color: #209cee;
+  background-color: #209cee;
+  color: white;
+}
+
+#btn2 {
+  border-color: #209cee;
+  color: #209cee;
 }
