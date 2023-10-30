@@ -2,13 +2,14 @@ import LinkForm from "./LinkForm";
 import LinksPreview from "./LinksPreview";
 import { useGetAccountQuery, useGetLinksByUserIdQuery } from "../app/apiSlice";
 import EditLinkCard from "./EditLinkCard";
+import LandingPage from "./LandingPage";
 
 const HomePage = () => {
   const { data: account } = useGetAccountQuery();
   const { data: links, isLoading: linksLoading } = useGetLinksByUserIdQuery();
 
   if (!account) {
-    return <div>Please Log in!</div>;
+    return <LandingPage account={account}></LandingPage>;
   }
   if (linksLoading) {
     return <div></div>;
@@ -23,7 +24,10 @@ const HomePage = () => {
         <div className="row pt-4">
           {links?.map((link) => {
             return (
-              <div className="d-flex justify-content-center pe-4" key={link.link_id}>
+              <div
+                className="d-flex justify-content-center pe-4"
+                key={link.link_id}
+              >
                 <EditLinkCard linkToEdit={link}></EditLinkCard>
               </div>
             );
