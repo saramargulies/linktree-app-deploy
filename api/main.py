@@ -13,8 +13,8 @@ app.include_router(trees.router, tags=["Trees"])
 
 
 origins = [
-    os.environ.get("CORS_HOST", "http://localhost:3000"),
     "https://linky-frontend.vercel.app",
+    os.environ.get("CORS_HOST", "http://localhost:3000"),
     "http://localhost:3000/",
 ]
 
