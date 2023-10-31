@@ -52,23 +52,23 @@ const SignUp = () => {
   };
 
   const validatePassword = () => {
-    if (passwordOne.toLowerCase() != passwordOne) setContainsUL(true);
+    if (password.toLowerCase() != password) setContainsUL(true);
     else setContainsUL(false);
 
-    if (passwordOne.toUpperCase() != passwordOne) setContainsLL(true);
+    if (password.toUpperCase() != password) setContainsLL(true);
     else setContainsLL(false);
 
-    if (/\d/.test(passwordOne)) setContainsN(true);
+    if (/\d/.test(password)) setContainsN(true);
     else setContainsN(false);
 
-    if (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(passwordOne))
+    if (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(password))
       setContainsSC(true);
     else setContainsSC(false);
 
-    if (passwordOne.length >= 8) setContains8C(true);
+    if (password.length >= 8) setContains8C(true);
     else setContains8C(false);
 
-    if (passwordOne !== "" && passwordOne === passwordTwo)
+    if (password !== "" && password === passwordConfirmation)
       setPasswordMatch(true);
     else setPasswordMatch(false);
 
