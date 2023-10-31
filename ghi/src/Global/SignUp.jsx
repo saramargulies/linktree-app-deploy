@@ -2,8 +2,8 @@ import { useSignupMutation } from "../app/apiSlice";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertError from "./AlertError";
-import './UpdatePasswordContainer.css';
-import MustContainItem from './MustContainItem';
+import "./UpdatePasswordContainer.css";
+import MustContainItem from "./MustContainItem";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const [containsUL, setContainsUL] = useState(false); 
-  const [containsLL, setContainsLL] = useState(false); 
+  const [containsUL, setContainsUL] = useState(false);
+  const [containsLL, setContainsLL] = useState(false);
   const [containsN, setContainsN] = useState(false);
-  const [containsSC, setContainsSC] = useState(false); 
-  const [contains8C, setContains8C] = useState(false); 
+  const [containsSC, setContainsSC] = useState(false);
+  const [contains8C, setContains8C] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(false);
 
   const [allValid, setAllValid] = useState(false);
@@ -91,8 +91,6 @@ const SignUp = () => {
         <div className="col-md-6 offset-md-3">
           <h1>SignUp</h1>
           <form onSubmit={handleSubmit}>
-            {errorMessage && <AlertError>{errorMessage}</AlertError>}
-
             <div className="mb-3">
               <label htmlFor="SignUp__first_name" className="form-label">
                 First Name (optional)
@@ -178,12 +176,15 @@ const SignUp = () => {
                 required
               />
             </div>
-            <h4 className="card-title">Password must contain:</h4>
             <div className="card d-flex justify-content-center">
-              {mustContainData.map((data) => (
-                <MustContainItem data={data} />
-              ))}
+              <div className="card-header">Password must contain:</div>
+              <ul className="list-group list-group-flush">
+                {mustContainData.map((data) => (
+                  <MustContainItem data={data} />
+                ))}
+              </ul>
             </div>
+            {errorMessage && <AlertError>{errorMessage}</AlertError>}
             <button
               type="submit"
               className="btn btn-success"
