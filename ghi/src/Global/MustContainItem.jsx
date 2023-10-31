@@ -14,8 +14,12 @@ const MustContainItem = (props) => {
 
   return (
     <>
-      <li className="list-group-item">{label}</li>
-      <div className={setClass()}></div>
+      <div className="MustContainItem">
+        <div className="must-item">
+          <li className="list-group-item must-text">{label}</li>
+          <div className={setClass()}></div>
+        </div>
+      </div>
     </>
   );
 };

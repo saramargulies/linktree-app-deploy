@@ -91,7 +91,8 @@ const SignUp = () => {
         <div className="col-md-6 offset-md-3">
           <h1>SignUp</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
+            <div className="row">
+            <div className="col mb-3">
               <label htmlFor="SignUp__first_name" className="form-label">
                 First Name (optional)
               </label>
@@ -103,7 +104,7 @@ const SignUp = () => {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="col mb-3">
               <label htmlFor="SignUp__last_name" className="form-label">
                 Last Name (optional)
               </label>
@@ -114,6 +115,10 @@ const SignUp = () => {
                 value={last_name}
                 onChange={(e) => setLastName(e.target.value)}
               />
+            </div>
+            </div>
+            <div className="row">
+              
             </div>
             <div className="mb-3">
               <label htmlFor="SignUp__email" className="form-label">
@@ -137,10 +142,12 @@ const SignUp = () => {
                 id="SignUp__username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                minLength={3}
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="row">
+            <div className="mb-3 col">
               <label htmlFor="SignUp__password" className="form-label">
                 Password
               </label>
@@ -156,7 +163,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3 col">
               <label
                 htmlFor="SignUp__password_confirmation"
                 className="form-label"
@@ -175,19 +182,21 @@ const SignUp = () => {
                 onKeyUp={validatePassword}
                 required
               />
-            </div>
-            <div className="card d-flex justify-content-center">
+            </div>              
+              </div>
+
+            {errorMessage && <AlertError>{errorMessage}</AlertError>}
+            <div className="must-container card">
               <div className="card-header">Password must contain:</div>
               <ul className="list-group list-group-flush">
                 {mustContainData.map((data) => (
-                  <MustContainItem data={data} />
+                  <MustContainItem data={data} key={data}/>
                 ))}
               </ul>
             </div>
-            {errorMessage && <AlertError>{errorMessage}</AlertError>}
             <button
               type="submit"
-              className="btn btn-success"
+              className="btn btn-success mt-3"
               style={{ color: "#f8f8ff" }}
             >
               Submit
