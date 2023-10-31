@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const linktreeApi = createApi({
   reducerPath: "linktreeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.PUBLIC_FASTAPI,
+    baseUrl: process.env.PUBLIC_URL,
     credentials: "include",
   }),
   endpoints: (builder) => ({
