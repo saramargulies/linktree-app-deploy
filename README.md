@@ -6,7 +6,7 @@ This project was made with Python, FastAPI, and PostgreSQL on the back end and R
 
 ## Deployed App
 
-A deployed version of this app can be found at: INSERT LINK HERE
+A deployed version of this app can be found at: https://linky-frontend.vercel.app/
 
 ## Docker set-up
 

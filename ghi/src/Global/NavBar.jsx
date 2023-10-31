@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useGetAccountQuery, useLogoutMutation } from "../app/apiSlice";
 import LoginForm from "./LoginForm";
 import AlertSuccess from "./AlertSuccess";
+import LinkyLogo from "../Images/logo-512x512.png"
 
 
 const NavBar = () => {
@@ -25,7 +26,7 @@ const NavBar = () => {
     <nav className="navbar navbar-dark bg-dark  navbar-expand-lg">
       <div className="container-fluid bg-dark">
     <Link className="navbar-brand" to="/">
-      Linky
+    <img src={LinkyLogo} className="logo-img" alt="logo" />
     </Link>
         <button
           className="navbar-toggler"

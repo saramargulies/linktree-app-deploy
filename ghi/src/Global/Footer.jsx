@@ -64,7 +64,7 @@ const Footer = () => {
               <h5 className="mb-1">Repository</h5>
               <div>
                 <a
-                  href="https://github.com/bradcochi/linktree-app"
+                  href="https://github.com/saramargulies/linktree-app-deploy"
                   target="_blank"
                   rel="noreferrer"
                 >
