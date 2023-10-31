@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AlertError from "./AlertError";
 
 const SignUp = () => {
+  console.log(process.env.FASTAPI)
   const navigate = useNavigate();
   const [signup, signupResult] = useSignupMutation();
   const [errorMessage, setErrorMessage] = useState("");

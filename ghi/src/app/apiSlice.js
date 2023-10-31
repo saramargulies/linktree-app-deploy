@@ -148,5 +148,3 @@ export const {
   useIncrementCounterMutation,
   useDeleteLinkMutation,
 } = linktreeApi;
-
-print(baseUrl)
