@@ -66,7 +66,7 @@ export const linktreeApi = createApi({
     }),
     getLinksByUserId: builder.query({
       query: (user_id) => ({
-        url: `links`,
+        url: `/links`,
         credentials: "include",
       }),
       providesTags: ["Links"],
@@ -117,7 +117,7 @@ export const linktreeApi = createApi({
     }),
     getTreesByUsername: builder.query({
       query: () => ({
-        url: `trees`,
+        url: `/trees`,
         credentials: "include",
       }),
       providesTags: ["Trees"],
@@ -148,3 +148,5 @@ export const {
   useIncrementCounterMutation,
   useDeleteLinkMutation,
 } = linktreeApi;
+
+print(baseUrl)
