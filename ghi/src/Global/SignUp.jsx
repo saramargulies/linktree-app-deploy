@@ -178,8 +178,8 @@ const SignUp = () => {
                 required
               />
             </div>
-            <h4>Must contain:</h4>
-            <div className="must-container cfb">
+            <h4 className="card-title">Password must contain:</h4>
+            <div className="card d-flex justify-content-center">
               {mustContainData.map((data) => (
                 <MustContainItem data={data} />
               ))}

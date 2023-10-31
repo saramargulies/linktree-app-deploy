@@ -13,7 +13,7 @@ const MustContainItem = props => {
     }
 
     return (
-        <div className="MustContainItem">
+        <div className="">
             <div className="must-item">
                 <li className="must-text">{label}</li>
                 <div className={setClass()}></div>
