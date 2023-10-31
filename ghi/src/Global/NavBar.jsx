@@ -26,7 +26,7 @@ const NavBar = () => {
     <nav className="navbar navbar-dark bg-dark  navbar-expand-lg">
       <div className="container-fluid bg-dark">
     <Link className="navbar-brand" to="/">
-    <img src={LinkyLogo} className="logo-img" alt="logo" />
+    <img id="nav-logo" src={LinkyLogo} className="logo-img" alt="logo" />
     </Link>
         <button
           className="navbar-toggler"

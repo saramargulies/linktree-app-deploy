@@ -112,3 +112,8 @@ code {
   border-color: #209cee;
   color: #209cee;
 }
+
+#nav-logo{
+  width: 100px;
+  height: 100px;
+}
